@@ -67,7 +67,7 @@ const reviews = [
        }else if(btnClass === "next-btn"){
            nextBtn();
        }else if(btnClass === "random-btn"){
-           console.log("random");
+          randomBtn();
        }
 
     })     
@@ -121,5 +121,11 @@ const reviews = [
       }
 
    }
-
+function randomBtn(){
+    let randomArrayIndex =  Math.floor(Math.random() * reviews.length );
+        reviewerImage.setAttribute("src",reviews[randomArrayIndex].img);
+        reviewerName.textContent = reviews[randomArrayIndex].name;
+        reviewerRole.textContent = reviews[randomArrayIndex].job;
+        reviewerComment.textContent =  reviews[randomArrayIndex].text;
+}
  
