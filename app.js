@@ -52,6 +52,8 @@ const reviews = [
   let reviewerRole =  document.getElementById("job");
   let reviewerComment = document.getElementById("info");
   let btns =  document.querySelectorAll("button");
+  let lastArrayItemIndex =  reviews.length - 1;
+
   let currentArrayIndex;
   
    btns.forEach(function(btn){
@@ -72,7 +74,24 @@ const reviews = [
    })
 
    function prevBtn(){
-       console.log("Previous");
+    let imageUrl = document.getElementById("person-img").getAttribute("src");
+       for(let i = 0; i < reviews.length; i++){
+           if(reviews[i].img == imageUrl){
+               currentArrayIndex = i;
+           }
+       }
+       if(currentArrayIndex == 0){
+        reviewerImage.setAttribute("src",reviews[lastArrayItemIndex].img);
+        reviewerName.textContent = reviews[lastArrayItemIndex].name;
+        reviewerRole.textContent = reviews[lastArrayItemIndex].job;
+        reviewerComment.textContent =  reviews[lastArrayItemIndex].text;
+       }else{
+        let previousArrayIndex =  currentArrayIndex - 1;
+        reviewerImage.setAttribute("src",reviews[previousArrayIndex].img);
+        reviewerName.textContent = reviews[previousArrayIndex].name;
+        reviewerRole.textContent = reviews[previousArrayIndex].job;
+        reviewerComment.textContent =  reviews[previousArrayIndex].text;
+       }   
    }
 
    function nextBtn(){
@@ -80,21 +99,14 @@ const reviews = [
       //add 1 to that index
       //display the array item
      
-      imageUrl =  document.getElementById("person-img").getAttribute("src");
-      /*reviews.forEach(function(review,index){
-           if(review.img === imageUrl){
-               currentArrayIndex = index;
-           }
-      })*/
+      let imageUrl =  document.getElementById("person-img").getAttribute("src");
+     
       let lastArrayItemIndex =  reviews.length - 1;
       for(let i = 0; i < reviews.length; i++){
           if(reviews[i].img == imageUrl){  
             currentArrayIndex = i;
           }
       }
-
-      //console.log(currentArrayIndex);
-
       if(currentArrayIndex == lastArrayItemIndex){
           currentArrayIndex = 0;
         reviewerImage.setAttribute("src",reviews[currentArrayIndex].img);
