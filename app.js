@@ -36,3 +36,78 @@ const reviews = [
         "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
     },
   ];
+
+
+
+  //add click event listener to the 3 buttons
+  //On click chevron right, select first array item.
+    //append properties to html elements of current item.
+  //On click chevron left, select previous array item 
+    //append properties of object to html element
+  //On click surprise me button, randomly generate an array index
+  //select item with array index
+  //append properties of selected object to html element
+  let reviewerImage = document.getElementById("person-img");
+  let reviewerName = document.getElementById("author");
+  let reviewerRole =  document.getElementById("job");
+  let reviewerComment = document.getElementById("info");
+  let btns =  document.querySelectorAll("button");
+  let currentArrayIndex;
+  
+   btns.forEach(function(btn){
+
+    btn.addEventListener("click",function(){
+      
+        let btnClass = btn.getAttribute("class");
+
+       if(btnClass === "prev-btn"){
+           prevBtn();
+       }else if(btnClass === "next-btn"){
+           nextBtn();
+       }else if(btnClass === "random-btn"){
+           console.log("random");
+       }
+
+    })     
+   })
+
+   function prevBtn(){
+       console.log("Previous");
+   }
+
+   function nextBtn(){
+      //find the currentindex of the array
+      //add 1 to that index
+      //display the array item
+     
+      imageUrl =  document.getElementById("person-img").getAttribute("src");
+      /*reviews.forEach(function(review,index){
+           if(review.img === imageUrl){
+               currentArrayIndex = index;
+           }
+      })*/
+      let lastArrayItemIndex =  reviews.length - 1;
+      for(let i = 0; i < reviews.length; i++){
+          if(reviews[i].img == imageUrl){  
+            currentArrayIndex = i;
+          }
+      }
+
+      //console.log(currentArrayIndex);
+
+      if(currentArrayIndex == lastArrayItemIndex){
+          currentArrayIndex = 0;
+        reviewerImage.setAttribute("src",reviews[currentArrayIndex].img);
+        reviewerName.textContent = reviews[currentArrayIndex].name;
+        reviewerRole.textContent = reviews[currentArrayIndex].job;
+        reviewerComment.textContent =  reviews[currentArrayIndex].text;
+      }else{
+        reviewerImage.setAttribute("src",reviews[currentArrayIndex + 1].img);
+        reviewerName.textContent = reviews[currentArrayIndex + 1].name;
+        reviewerRole.textContent = reviews[currentArrayIndex + 1].job;
+        reviewerComment.textContent =  reviews[currentArrayIndex + 1 ].text;
+      }
+
+   }
+
+ 
